@@ -11,6 +11,15 @@
 python manage.py renameproject project youprojectname
 ```
 
+## Generated secret key.
+```sh
+python manage.py generate_secret_key
+```
+## Save the generated secret key to `base.py` file.
+```sh
+python manage.py generate_secret_key -s
+```
+
 
 ## Project Tree
 ```bash
