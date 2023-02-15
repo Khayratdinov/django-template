@@ -1,0 +1,4 @@
+-r base.txt
+
+# Add development-specific packages
+django-debug-toolbar

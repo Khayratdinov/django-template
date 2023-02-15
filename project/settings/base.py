@@ -22,7 +22,8 @@ SECRET_KEY = "1u_l2m)cay%%)jki^)6%)r$1)qyeh=%uljcs6k^4w0gj_*1ek%"
 # SECRET_KEY = env("SECRET_KEY")
 
 
-DEBUG = env("DEBUG")
+DEBUG = True
+DEBUG_TOOLBAR = False
 
 ALLOWED_HOSTS = ["*"]
 
