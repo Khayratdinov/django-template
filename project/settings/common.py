@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 import environ
-import os
+import importlib
 
 env = environ.Env(DEBUG=(bool, False))
 
@@ -77,6 +77,14 @@ TEMPLATES = [
 WSGI_APPLICATION = "project.wsgi.application"
 
 
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": ROOT_DIR / "db.sqlite3",
+    }
+}
+
+
 # ============================ PASSWORD VALIDATION =========================== #
 
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -95,7 +103,6 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
-
 
 # =========================== INTERNATIONALIZATION =========================== #
 
@@ -132,3 +139,22 @@ MEDIA_URL = "/media/"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Check if the debug_toolbar package is installed
+if importlib.util.find_spec("debug_toolbar"):
+    # Import the debug_toolbar module and add it to the INSTALLED_APPS
+
+    DEBUG_TOOLBAR = True
+
+    import debug_toolbar
+
+    INSTALLED_APPS.append("debug_toolbar")
+
+    # Add debug_toolbar to the MIDDLEWARE
+    MIDDLEWARE.insert(
+        0,
+        "debug_toolbar.middleware.DebugToolbarMiddleware",
+    )
+
+    # Set INTERNAL_IPS to allow local access to the debug_toolbar
+    INTERNAL_IPS = ["127.0.0.1"]
